@@ -7,7 +7,6 @@ namespace TicTacToeGame
 {
 	class Program
 	{
-		
 		static void Main(string[] args)
 		{
 			char[] board = new char[9];
@@ -47,7 +46,6 @@ namespace TicTacToeGame
 				Console.Write("   " + b[i+1] + "  |");
 				Console.Write("   " + b[i+2] + "   |\n");
 				Console.WriteLine("-----------------------");
-				
 			}
 		}
 		static void Game(ref int move, ref char[] b)
