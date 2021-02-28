@@ -13,10 +13,12 @@ namespace TicTacToeGame
 			int MoveCount = 0;
 			Setup(board);
 			bool HasGameEnded = false;
-			while (!(HasGameEnded = Check(board))) {
+			while (!(HasGameEnded)) {
 				Console.Clear();
 				Draw(board);
 				Game(ref MoveCount, ref board);
+				if (MoveCount >= 5)
+					HasGameEnded = Check(board);
 			}
 			EndGame(MoveCount, board);
 		}
@@ -50,13 +52,22 @@ namespace TicTacToeGame
 		}
 		static void Game(ref int move, ref char[] b)
 		{//User inputs which location to place move, and update array.
+			bool RepeatMove = false;
 			Console.Write("Location To Place Your Move: ");
 			int index = Convert.ToInt32(Console.ReadLine());
 			if (move % 2 == 0) 
-				b[index] = 'x';
-			else 
-				b[index] = 'o';
-			move++;
+				if (b[index] != 'O' && b[index] != 'X')
+					b[index] = 'X';
+				else 
+					RepeatMove = true;
+			else
+				if (b[index] != 'O' && b[index] != 'X')
+					b[index] = 'O';
+				else 
+					RepeatMove = true;
+			if (!RepeatMove)
+				move++;
+			
 		}
 		static void EndGame(int move, char[] b)
 		{//Display final board and which player has won.
